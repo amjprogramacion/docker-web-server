@@ -13,7 +13,7 @@ Exposes phpMyAdmin on http://localhost:8090/
 # Install
 1 - Download this repository  
 2 - Open your Terminal app and navigate to your cloned project's folder  
+3 - Use this command  
 ```
-# 3 - Use this command  
 make up  
 ```
