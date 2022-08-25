@@ -8,4 +8,12 @@ Exposes phpMyAdmin on http://localhost:8090/
 ## Pre-requisites
 1 - Install [Docker](https://www.docker.com/products/docker-desktop/).  
 2 - Install [Homebrew](https://brew.sh/).  
-2 - Install [Make](https://formulae.brew.sh/formula/make).  
+3 - Install [Make](https://formulae.brew.sh/formula/make).  
+
+# Install
+1 - Download this repository  
+2 - Open your Terminal app and navigate to your cloned project's folder  
+```
+# 3 - Use this command  
+make up  
+```
