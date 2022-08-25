@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_container
+    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    environment:
+      MYSQL_DATABASE: docker_db
+      MYSQL_USER: docker_user
+      MYSQL_PASSWORD: docker_pass
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./dump_db:/docker-entrypoint-initdb.d
+      - ./conf_db:/etc/mysql/conf.d
+      - ./persistent_db:/var/lib/mysql
+    networks:
+      - default
+  
+  web:
+    image: cdecarlos/php-apache:7.2
+    container_name: php_container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/html
+    networks:
+      - default
+    links:
+      - db  
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin_container
+    environment:
+      UPLOAD_LIMIT: 100M
+    links:
+      - db:db
+    depends_on:
+      - db
+    ports:
+      - 8090:80
