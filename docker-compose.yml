@@ -5,7 +5,6 @@ services:
   db:
     image: mysql:8.0
     container_name: mysql_container
-    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--default-authentication-plugin=mysql_native_password']
     environment:
       MYSQL_DATABASE: docker_db
       MYSQL_USER: docker_user
@@ -15,6 +14,7 @@ services:
       - ./dump_db:/docker-entrypoint-initdb.d
       - ./conf_db:/etc/mysql/conf.d
       - ./persistent_db:/var/lib/mysql
+    command: ['mysqld', '--character-set-server=utf8', '--collation-server=utf8_unicode_ci', '--default-authentication-plugin=mysql_native_password']
     networks:
       - default
   
@@ -33,11 +33,11 @@ services:
   phpmyadmin:
     image: phpmyadmin
     container_name: phpmyadmin_container
+    ports:
+      - 8090:80
     environment:
       UPLOAD_LIMIT: 100M
     links:
       - db:db
     depends_on:
       - db
-    ports:
-      - 8090:80

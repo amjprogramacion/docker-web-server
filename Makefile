@@ -1,7 +1,7 @@
 up:
 	docker-compose up
 
-up-nd:
+up-nodetail:
 	docker-compose up -d
 
 down:
